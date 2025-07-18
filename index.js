@@ -50,3 +50,41 @@ const handleScrollAnimation = () => {
 
 window.addEventListener('scroll', handleScrollAnimation);
 window.addEventListener('load', handleScrollAnimation);
+
+// Hamburger menu toggle
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("nav-menu");
+
+hamburger.addEventListener("click", () => {
+  navMenu.classList.toggle("open");
+});const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("nav-menu");
+
+const toggleMenu = () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("open");
+};
+
+const closeMenu = () => {
+  hamburger.classList.remove("active");
+  navMenu.classList.remove("open");
+};
+
+// Toggle on hamburger click
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // Prevent triggering document click
+  toggleMenu();
+});
+
+// Auto-close on link click
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => closeMenu());
+});
+
+// Close on outside click
+document.addEventListener("click", (e) => {
+  if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+    closeMenu();
+  }
+});
+
