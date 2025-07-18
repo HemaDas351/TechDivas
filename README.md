@@ -88,13 +88,11 @@ The app addresses the growing need for individuals to monitor and improve their 
 
 ## 👨‍💻 Team
 
-| Name        | Role                 |
-| ----------- | -------------------- |
-| Hema Das    | Frontend & UI Design |
-| \[Member 2] | Backend              |
-| \[Member 3] | Content & Research   |
-| \[Member 4] | DevOps & Deployment  |
-
+| Name              | Role                 |
+| ----------------- | -------------------- |
+| Hema Das          | Frontend & UI Design |
+| Daisy Baishya     | Backend & Frontend   |
+| Anuja Chakravarty | Content & Frontend   |
 ---
 
 ## 📄 License
