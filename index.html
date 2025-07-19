@@ -3,104 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Landing Page</title>
+  <title>Automated HR Dashboard</title>
+
+  <!-- External Stylesheets -->
   <link rel="stylesheet" href="index.css"/>
-  <script defer src="index.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
+  <!-- JavaScript -->
+  <script defer src="index.js"></script>
 </head>
 <body>
-    <!-- Loader -->
+
+<!-- Loader -->
 <div id="loader">
   <div class="spinner"></div>
 </div>
 
-
-  <header class="navbar">
-  <div class="logo">MyLanding</div>
-
-  <!-- Hamburger Icon -->
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="logo-details">
+    <i class='bx bxl-c-plus-plus icon'></i>
+    <div class="logo_name">CodingStella</div>
+    <i class='bx bx-menu' id="btn"></i>
   </div>
+  <ul class="nav-list">
+    <li>
+      <i class='bx bx-search'></i>
+      <input type="text" placeholder="Search...">
+      <span class="tooltip">Search</span>
+    </li>
+    <li><a href="#"><i class='bx bx-grid-alt'></i><span class="links_name">Dashboard</span></a><span class="tooltip">Dashboard</span></li>
+    <li><a href="#"><i class='bx bx-user'></i><span class="links_name">User</span></a><span class="tooltip">User</span></li>
+    <li><a href="#"><i class='bx bx-chat'></i><span class="links_name">Messages</span></a><span class="tooltip">Messages</span></li>
+    <li><a href="#"><i class='bx bx-pie-chart-alt-2'></i><span class="links_name">Analytics</span></a><span class="tooltip">Analytics</span></li>
+    <li><a href="#"><i class='bx bx-folder'></i><span class="links_name">Files</span></a><span class="tooltip">File Manager</span></li>
+    <li><a href="#"><i class='bx bx-cart-alt'></i><span class="links_name">Order</span></a><span class="tooltip">Order</span></li>
+    <li><a href="#"><i class='bx bx-heart'></i><span class="links_name">Saved</span></a><span class="tooltip">Saved</span></li>
+    <li><a href="#"><i class='bx bx-cog'></i><span class="links_name">Settings</span></a><span class="tooltip">Setting</span></li>
+    <li class="profile">
+      <div class="profile-details">
+        <img src="https://drive.google.com/uc?export=view&id=1ETZYgPpWbbBtpJnhi42_IR3vOwSOpR4z" alt="Profile Image">
+        <div class="name_job">
+          <div class="name">Stella Army</div>
+          <div class="job">Web Designer</div>
+        </div>
+      </div>
+      <i class='bx bx-log-out' id="log_out"></i>
+    </li>
+  </ul>
+</div>
 
-  <!-- Nav Menu -->
-  <nav id="nav-menu" class="nav-links">
-    <a href="#announcement">Announcement</a>
-    <a href="#accomplishments">Accomplishments</a>
-    <a href="#resources">Resources</a>
-    <a href="#login">Login</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<!-- Main Section -->
+<section class="home-section">
+  <div class="text">Dashboard</div>
 
-
-
-  <!-- Announcement Section -->
-  <section id="announcement" class="section announcement fade-in">
+  <!-- Announcement -->
+  <section id="announcement" class="section fade-in animated-section">
     <h2>📢 Latest Announcement</h2>
-    <p>Registrations for the upcoming event are now open! Don't miss out!</p>
+    <p>Registrations for the upcoming event are now open! Don’t miss out!</p>
   </section>
 
-  <!-- Accomplishments Section -->
-  <section id="accomplishments" class="section fade-in">
+  <!-- Accomplishments -->
+  <section id="accomplishments" class="section fade-in animated-section">
     <h2>🏆 Accomplishments</h2>
     <p>We have successfully completed 10+ major projects in the last year.</p>
   </section>
 
-  <!-- Resources Section -->
-  <section id="resources" class="section fade-in">
+  <!-- Resources -->
+  <section id="resources" class="section fade-in animated-section">
     <h2>📚 Resources</h2>
     <p>Access study materials, event guides, and more.</p>
   </section>
 
-  <!-- Login Section -->
-  <section id="login" class="section login fade-in">
-    <h2>🔐 Login</h2>
-    <form>
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-      <div>
-        Don't have an account already? Want to sign-up?<a onclick="signup()">Sign up</a>
-      </div>
-    </form>
-  </section>
-
-  <!-- signup section -->
-  <section id="signup" class="section signup">
-    <form id="signupform">
-      <h2>Sign-up</h2>
-      <input type="text" placeholder="Full Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <input type="password" placeholder="Confirm Password" required />
-      <button type="submit">Create Account</button>  
-      <div>
-        Already have an account? <a onclick="login()">Sign in</a>
-      </div>
-    </form>
-  </section>
-
   <!-- Feedback Section -->
-<section id="feedback" class="section animated-section fade-in">
-  <h2>💬 Feedback</h2>
-  <p>We value your opinions. Share your thoughts to help us improve!</p>
-  <form class="feedback-form">
-    <textarea placeholder="Write your feedback here..." required></textarea>
-    <button type="submit">Submit</button>
-  </form>
-</section>
+  <section id="feedback" class="section feedback fade-in animated-section">
+    <h2>💬 Feedback</h2>
+    <p>We value your opinions. Share your thoughts to help us improve!</p>
+    <form class="feedback-form">
+      <textarea placeholder="Write your feedback here..." required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
 
-<!-- Opportunities Section -->
-<section id="opportunities" class="section animated-section fade-in">
-  <h2>🌟 Opportunities</h2>
-  <p>Explore internships, workshops, and events to boost your skills and career.</p>
-</section>
+  <!-- Opportunities Section -->
+  <section id="opportunities" class="section fade-in animated-section">
+    <h2>🌟 Opportunities</h2>
+    <p>Explore internships, workshops, and events to boost your skills and career.</p>
+  </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="section contact fade-in">
+  <section id="contact" class="section fade-in animated-section">
     <h2>📞 Contact Us</h2>
     <p>Email: info@example.com | Phone: +91 9876543210</p>
   </section>
@@ -114,8 +107,9 @@
     </div>
     <p>&copy; 2025 MyLanding. All rights reserved.</p>
   </footer>
+</section>
 
-  <!-- Scroll to Top Button -->
+<!-- Scroll to Top Button -->
 <button id="scrollTopBtn" title="Go to top">↑</button>
 
 </body>

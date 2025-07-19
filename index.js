@@ -1,4 +1,4 @@
-// Hide loader after page load
+// Wait for the entire page to load
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) {
@@ -10,18 +10,8 @@ window.addEventListener("load", () => {
   handleScrollAnimation();
 });
 
-// Login form alert
-const loginForm = document.querySelector("form");
-if (loginForm) {
-  loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    alert("Login functionality coming soon!");
-  });
-}
-
-// Slide-in animation on scroll
+// Scroll animation for sections
 const animatedSections = document.querySelectorAll(".animated-section");
-
 const revealOnScroll = () => {
   animatedSections.forEach(section => {
     const rect = section.getBoundingClientRect();
@@ -31,65 +21,59 @@ const revealOnScroll = () => {
   });
 };
 
-window.addEventListener("scroll", revealOnScroll);
-
-// Scroll reveal fade-in
-const fadeElements = document.querySelectorAll('.fade-in');
-
+const fadeElements = document.querySelectorAll(".fade-in");
 const handleScrollAnimation = () => {
   fadeElements.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
-      el.classList.add('visible');
+      el.classList.add("visible");
     }
   });
 };
 
-window.addEventListener('scroll', handleScrollAnimation);
+window.addEventListener("scroll", () => {
+  revealOnScroll();
+  handleScrollAnimation();
 
-// Scroll to Top button
-const scrollBtn = document.getElementById("scrollTopBtn");
-
-if (scrollBtn) {
-  window.addEventListener("scroll", () => {
+  // Scroll to top button visibility
+  const scrollBtn = document.getElementById("scrollTopBtn");
+  if (scrollBtn) {
     scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
-  });
+  }
+});
 
+// Scroll to top behavior
+const scrollBtn = document.getElementById("scrollTopBtn");
+if (scrollBtn) {
   scrollBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
-// Hamburger menu toggle
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("nav-menu");
+// Sidebar toggle functionality
+const sidebar = document.querySelector(".sidebar");
+const closeBtn = document.querySelector("#btn");
+const searchBtn = document.querySelector(".bx-search");
 
-if (hamburger && navMenu) {
-  const toggleMenu = () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("open");
-  };
-
-  const closeMenu = () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("open");
-  };
-
-  // Toggle on hamburger click
-  hamburger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleMenu();
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();
   });
+}
 
-  // Auto-close on nav link click
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => closeMenu());
+if (searchBtn) {
+  searchBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();
   });
+}
 
-  // Close on outside click
-  document.addEventListener("click", (e) => {
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-      closeMenu();
-    }
-  });
+// Change sidebar button icon
+function menuBtnChange() {
+  if (sidebar.classList.contains("open")) {
+    closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
 }
