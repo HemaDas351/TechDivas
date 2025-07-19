@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/authMiddleware');
 const Ticket = require('../models/Ticket');
+const ticketController=require('../controllers/ticketsController');
 
 // Create a ticket
 router.post('/create', verifyToken, async (req, res) => {
@@ -22,6 +23,6 @@ router.get('/', verifyToken, async (req, res) => {
   res.json(tickets);
 });
 
-router.put('/:id', updateTicket);
+router.put('/:id', ticketController.updateTicket);
 
 module.exports = router;
