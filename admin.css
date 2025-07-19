@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f4f4;
+  background: #f4f6fa;
   color: #333;
 }
 
@@ -16,21 +16,26 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
+  background-color: #f4f6fa;
 }
 
 /* Sidebar */
 .sidebar {
   width: 250px;
-  background: #110255;
+  background: #0e1446;
   color: white;
-  padding: 20px;
+  padding: 25px 20px;
   flex-shrink: 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar h2 {
-  font-size: 24px;
-  margin-bottom: 30px;
+  font-size: 26px;
+  margin-bottom: 35px;
   text-align: center;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
 }
 
 .sidebar nav ul {
@@ -38,101 +43,129 @@ body {
 }
 
 .sidebar nav ul li {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 .sidebar nav ul li a {
   display: block;
-  padding: 12px 18px;
-  background-color: #1e168b;
+  padding: 12px 20px;
+  background-color: #1e237e;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s ease;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .sidebar nav ul li a:hover {
-  background-color: #3020ad;
+  background-color: #3d4df5;
 }
 
 /* Main Content */
 .main-content {
   flex-grow: 1;
-  padding: 40px 30px;
+  padding: 50px 40px;
   overflow-y: auto;
-  background: #f9f9f9;
+  background: #ffffff;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.03);
 }
 
 .dashboard-home h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #110255;
+  font-size: 30px;
+  margin-bottom: 25px;
+  color: #0e1446;
+  font-weight: 600;
 }
 
 /* Quick Links Section */
 .quick-links {
   display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  margin-top: 20px;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: 25px;
 }
 
 .quick-links button {
-  padding: 12px;
-  background: #110255;
+  padding: 14px;
+  background: #0e1446;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  font-weight: 500;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .quick-links button:hover {
-  background: #1f3ad8;
+  background: #3d4df5;
   transform: translateY(-2px);
 }
 
 .quick-links button:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
-/* Tables (if any used in other pages) */
+.btn-link {
+  display: inline-block;
+  padding: 14px;
+  background: #0e1446;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.btn-link:hover {
+  background: #3d4df5;
+}
+
+/* iframe styling */
+iframe#contentFrame {
+  width: 100%;
+  height: 70vh;
+  border: none;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  background: #f9f9f9;
+}
+
+/* Tables (optional pages) */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
   background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 8px;
   overflow: hidden;
 }
 
 table th,
 table td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
+  padding: 14px;
+  border-bottom: 1px solid #eee;
   text-align: left;
 }
 
 table th {
-  background: #e3e6f3;
+  background: #eef0fc;
   font-weight: 600;
-}
-
-/* General Button (if reused elsewhere) */
-button a {
-  color: white;
-  text-decoration: none;
 }
 
 /* Card Component */
 .card {
   background: white;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
 }
 
 /* Responsive Sidebar for Small Screens */
@@ -144,16 +177,17 @@ button a {
   .sidebar {
     width: 100%;
     text-align: center;
-    padding: 15px;
+    padding: 20px 15px;
   }
 
   .sidebar nav ul li a {
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
   }
 
   .main-content {
     padding: 30px 20px;
+    border-radius: 0;
   }
 
   .dashboard-home h2 {
@@ -164,5 +198,3 @@ button a {
     grid-template-columns: 1fr;
   }
 }
-
-
