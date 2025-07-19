@@ -1,10 +1,11 @@
-/* Base Styles */
+/* Base Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body {
+html, body {
+  height: 100%;
   font-family: "Segoe UI", sans-serif;
   background: #f4f4f4;
   color: #333;
@@ -20,10 +21,9 @@ ul {
 /* Loader */
 #loader {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  inset: 0;
   background: #fff;
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,13 +33,14 @@ ul {
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 250px;
   height: 100vh;
   background: #003049;
   padding: 1rem;
+  z-index: 1000;
   transition: transform 0.3s ease;
-  z-index: 999;
 }
 .sidebar .logo-section {
   display: flex;
@@ -48,14 +49,11 @@ ul {
   margin-bottom: 2rem;
 }
 .sidebar .logo-name {
+  margin-top: 2rem;
   font-size: 1.2rem;
   color: white;
 }
-.sidebar .bx-menu {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
+
 .sidebar .nav-links li {
   margin: 1rem 0;
 }
@@ -72,7 +70,7 @@ ul {
   background: #005577;
 }
 
-/* Hamburger (Mobile only) */
+/* Hamburger */
 .hamburger {
   display: none;
   position: fixed;
@@ -80,34 +78,60 @@ ul {
   left: 1rem;
   font-size: 28px;
   z-index: 1001;
+  color: #dae4e9;
   cursor: pointer;
-  color: #003049;
 }
 
-/* Main Content */
-.main-content {
+/* Main Layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main.main-content {
+  flex: 1;
   margin-left: 250px;
   padding: 2rem;
-  transition: margin 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
-.section {
-  background: #fff;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+/* Spline Background */
+.spline-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
 }
+spline-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Footer */
 footer.section {
   text-align: center;
   font-size: 0.9rem;
   color: #777;
+  padding: 1rem 0;
+  background: #f4f4f4;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }
 
-/* Scroll to Top */
+/* Scroll to Top Button */
 #scrollTopBtn {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 70px;
   background: #003049;
   color: white;
   border: none;
@@ -118,18 +142,7 @@ footer.section {
   z-index: 999;
 }
 
-/* Animations */
-.animated-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-}
-.animated-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -155,8 +168,9 @@ footer.section {
     padding: 0.5rem 0.8rem;
     font-size: 0.95rem;
   }
-
-  .section {
-    padding: 1rem;
+}
+@media (max-width: 768px) {
+  spline-viewer {
+    height: 95vh;
   }
 }

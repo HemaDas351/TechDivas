@@ -6,22 +6,23 @@
   <title>HR Management Dashboard</title>
   <link rel="stylesheet" href="index.css" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.33/build/spline-viewer.js"></script>
 </head>
+
 <body>
   <!-- Loader -->
   <div id="loader">Loading...</div>
 
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
-    <div class="logo-section">
-      <i class="bx bx-menu" id="btn"></i>
+    <div class="logo-section"><br><br>
+      <
       <span class="logo-name">HR Dashboard</span>
     </div>
     <ul class="nav-links">
       <li><a href="#announcements"><i class="bx bx-bell"></i><span>Announcements</span></a></li>
-      <li><a href="#accomplishments"><i class="bx bx-star"></i><span>Accomplishments</span></a></li>
-      <li><a href="#resources"><i class="bx bx-book"></i><span>Resources</span></a></li>
-      <li><a href="#opportunities"><i class="bx bx-briefcase"></i><span>Opportunities</span></a></li>
+      <li><a href="#accomplishments"><i class="bx bx-star"></i><span>Deliverable</span></a></li>
+      <li><a href="#resources"><i class="bx bx-book"></i><span>Ticket System</span></a></li>
       <li><a href="#feedback"><i class="bx bx-message"></i><span>Feedback</span></a></li>
       <li><a href="#contact"><i class="bx bx-phone"></i><span>Contact</span></a></li>
     </ul>
@@ -34,14 +35,13 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <section id="announcements" class="section animated-section">Announcements Section</section>
-    <section id="accomplishments" class="section animated-section">Accomplishments Section</section>
-    <section id="resources" class="section animated-section">Resources Section</section>
-    <section id="opportunities" class="section animated-section">Opportunities Section</section>
-    <section id="feedback" class="section animated-section">Feedback Section</section>
-    <section id="contact" class="section animated-section">Contact Section</section>
-    <footer class="section">© 2025 HR Management</footer>
+    <div class="spline-background">
+      <spline-viewer url="https://prod.spline.design/546m4QeP9Nx3vj-B/scene.splinecode"></spline-viewer>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="section">© 2025 HR Management</footer>
 
   <!-- Scroll to top -->
   <button id="scrollTopBtn">↑</button>
