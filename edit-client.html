@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Client</title>
+  <link rel="stylesheet" href="edit-client.css" />
+</head>
+<body>
+  <main class="main-content">
+    <section class="edit-client container">
+      <h2>Edit Client</h2>
+      <form id="editClientForm">
+        <label>
+          Name:
+          <input type="text" name="name" required>
+        </label>
+
+        <label>
+          Email:
+          <input type="email" name="email" required>
+        </label>
+
+        <label>
+          Password:
+          <input type="password" name="password" required>
+        </label>
+
+        <label>
+          Role:
+          <input type="text" name="role" required>
+        </label>
+
+        <div class="button-group">
+          <button type="submit">Update Client</button>
+          <button type="button" onclick="window.location.href='Clients.html'">Cancel</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const index = localStorage.getItem("editClientIndex");
+    const clients = JSON.parse(localStorage.getItem("clients")) || [];
+
+    if (index === null || !clients[index]) {
+      alert("Client not found!");
+      window.location.href = "Clients.html";
+    }
+
+    const form = document.getElementById("editClientForm");
+    const client = clients[index];
+
+    form.name.value = client.name;
+    form.email.value = client.email;
+    form.password.value = client.password;
+    form.role.value = client.role;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      clients[index] = {
+        name: form.name.value,
+        email: form.email.value,
+        password: form.password.value,
+        role: form.role.value
+      };
+
+      localStorage.setItem("clients", JSON.stringify(clients));
+      alert("Client updated successfully!");
+      window.location.href = "Clients.html";
+    });
+  </script>
+</body>
+</html>

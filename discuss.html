@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discussion & Feedback - HR Dashboard</title>
+  <link rel="stylesheet" href="discuss.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="logo-section"><br><br>
+      <span class="logo-name">HR Dashboard</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="admin.html"><i class="bx bx-shield"></i><span>Admin Panel</span></a></li>
+      <li><a href="Deliverables.html"><i class="bx bx-star"></i><span>Deliverable</span></a></li>
+      <li><a href="Tickets.html"><i class="bx bx-book"></i><span>Ticket System</span></a></li>
+      <li><a href="discuss.html" class="active"><i class="bx bx-message"></i><span>Feedback</span></a></li>
+      <li><a href="contact.html"><i class="bx bx-phone"></i><span>Contact</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Hamburger -->
+  <div class="hamburger" id="hamburger">
+    <i class="bx bx-menu"></i>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Discussion Forum -->
+    <section class="discussion-section">
+      <h2>Discussion Forum</h2>
+      <div class="discussion-container">
+        <form id="postForm">
+          <input type="text" id="username" placeholder="Your Name" required />
+          <textarea id="message" rows="3" placeholder="Ask a question or share something..." required></textarea>
+          <button type="submit">Post</button>
+        </form>
+        <div id="discussionFeed" class="discussion-feed"></div>
+      </div>
+    </section>
+
+    <!-- Feedback Form -->
+    <section class="feedback-section" id="feedback">
+      <h2>Submit Feedback</h2>
+      <form id="feedbackForm">
+        <input type="text" id="feedbackName" placeholder="Your Name" required />
+        <input type="email" id="feedbackEmail" placeholder="Your Email" required />
+        <select id="feedbackType" required>
+          <option value="">Select Type</option>
+          <option value="Bug">Bug Report</option>
+          <option value="Feature">Feature Request</option>
+          <option value="General">General Feedback</option>
+        </select>
+        <textarea id="feedbackMessage" rows="4" placeholder="Your Feedback" required></textarea>
+        <button type="submit">Send Feedback</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="section">© 2025 HR Management</footer>
+
+  <script>
+    // Discussion posting
+    document.getElementById("postForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("username").value;
+      const message = document.getElementById("message").value;
+      const feed = document.getElementById("discussionFeed");
+
+      const post = document.createElement("div");
+      post.className = "post";
+      post.innerHTML = `<strong>${name}</strong><p>${message}</p><span>${new Date().toLocaleString()}</span>`;
+
+      feed.prepend(post);
+      e.target.reset();
+    });
+
+    // Feedback form
+    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Feedback submitted successfully!");
+      e.target.reset();
+    });
+
+   
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+
+  // Scroll-to-top button
+const scrollBtn = document.getElementById("scrollTopBtn");
+window.onscroll = () => {
+  scrollBtn.style.display = window.scrollY > 200 ? "block" : "none";
+};
+scrollBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+
+  </script>
+  <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+
+</body>
+</html>

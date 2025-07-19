@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -5,31 +6,35 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f4f4f4;
+  color: #333;
 }
 
+/* Container Layout */
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: row;
 }
 
+/* Sidebar */
 .sidebar {
-  width: 200px;
+  width: 250px;
   background: #110255;
   color: white;
   padding: 20px;
+  flex-shrink: 0;
 }
 
 .sidebar h2 {
-  font-size: 28px;
+  font-size: 24px;
   margin-bottom: 30px;
   text-align: center;
 }
 
 .sidebar nav ul {
   list-style: none;
-  padding: 0;
 }
 
 .sidebar nav ul li {
@@ -38,11 +43,11 @@ body {
 
 .sidebar nav ul li a {
   display: block;
-  padding: 10px 15px;
+  padding: 12px 18px;
   background-color: #1e168b;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 5px;
   transition: background 0.3s ease;
 }
 
@@ -50,12 +55,78 @@ body {
   background-color: #3020ad;
 }
 
+/* Main Content */
 .main-content {
   flex-grow: 1;
-  padding: 50px;
+  padding: 40px 30px;
   overflow-y: auto;
+  background: #f9f9f9;
 }
 
+.dashboard-home h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #110255;
+}
+
+/* Quick Links Section */
+.quick-links {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-top: 20px;
+}
+
+.quick-links button {
+  padding: 12px;
+  background: #110255;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.quick-links button:hover {
+  background: #1f3ad8;
+  transform: translateY(-2px);
+}
+
+.quick-links button:active {
+  transform: scale(0.98);
+}
+
+/* Tables (if any used in other pages) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+table th,
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background: #e3e6f3;
+  font-weight: 600;
+}
+
+/* General Button (if reused elsewhere) */
+button a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Card Component */
 .card {
   background: white;
   border-radius: 6px;
@@ -64,25 +135,41 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.card h3 {
-  margin-bottom: 10px;
+/* Responsive Sidebar for Small Screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .sidebar nav ul li a {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .main-content {
+    padding: 30px 20px;
+  }
+
+  .dashboard-home h2 {
+    font-size: 24px;
+  }
+
+  .quick-links {
+    grid-template-columns: 1fr;
+  }
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 10px;
-}
-
-table th,
-table td {
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left;
-}
-
-button {
-  padding: 10px 16px;
+/* Action Buttons for tables */
+button.action-btn {
+  margin: 0 4px;
+  padding: 6px 10px;
+  font-size: 14px;
   background: #110255;
   color: white;
   border: none;
@@ -90,30 +177,21 @@ button {
   cursor: pointer;
 }
 
-button a {
-  color: white;
-  text-decoration: none;
-}
-
-button:hover {
+button.action-btn:hover {
   background: #1f3ad8;
 }
-
-.quick-links {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.quick-links button {
+.quick-links a.btn-link {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #110255;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  text-align: center;
   flex: 1;
 }
-button.action-btn {
-  margin: 0 2px;
-  padding: 4px 8px;
-  font-size: 14px;
-   cursor: pointer;
-  border: none;
-  border-radius: 4px;
-}
 
+.quick-links a.btn-link:hover {
+  background: #1f3ad8;
+}
