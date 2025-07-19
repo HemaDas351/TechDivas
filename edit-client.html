@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Client</title>
+  <link rel="stylesheet" href="add-new-client.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add New Client</h2>
+    <form id="clientForm">
+      <label for="name">Client Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="role">Role</label>
+      <select id="role" name="role" required>
+        <option value="">Select role</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="Backend Developer">Backend Developer</option>
+        <option value="UI/UX Designer">UI/UX Designer</option>
+        <option value="Product Owner">Product Owner</option>
+      </select>
+
+      <button type="submit">Save Client details</button>
+    </form>
+  </div>
+
+  <script>
+    // Initialize static clients only once
+    if (!localStorage.getItem('clientsInitialized')) {
+      const staticClients = [
+        { name: "Sanjukta Deka", email: "Sanjukta@example.com", password: "123456", role: "HR Manager" },
+        { name: "Rema Das", email: "Rema@example.com", password: "123456", role: "Content Head" },
+        { name: "Ankita Kalita", email: "ankita@example.com", password: "123456", role: "Financial Advisor" },
+        { name: "Mariam Ahmed", email: "MariamA@example.com", password: "123456", role: "Frontend Senior Developer" }
+      ];
+      localStorage.setItem('clients', JSON.stringify(staticClients));
+      localStorage.setItem('clientsInitialized', 'true');
+    }
+
+    document.getElementById('clientForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+
+      let clients = JSON.parse(localStorage.getItem('clients')) || [];
+
+      clients.push({ name, email, password, role });
+
+      localStorage.setItem('clients', JSON.stringify(clients));
+
+      window.location.href = 'Clients.html';
+    });
+  </script>
+</body>
+</html>
