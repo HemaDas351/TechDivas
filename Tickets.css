@@ -1,0 +1,51 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+#ticketContainer {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Base ticket styling */
+.ticket {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 6px solid #ccc; /* fallback */
+}
+
+/* Priority-specific borders */
+.ticket.low {
+  border-left-color: #27ae60; /* Green */
+}
+
+.ticket.medium {
+  border-left-color: #f1c40f; /* Yellow */
+}
+
+.ticket.high {
+  border-left-color: #e74c3c; /* Red */
+}
+
+.ticket p {
+  margin: 8px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.ticket p strong {
+  color: #2c3e50;
+}

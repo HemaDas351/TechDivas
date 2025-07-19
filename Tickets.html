@@ -105,99 +105,106 @@
     </select>
 
     <input type="text" id="searchInput" placeholder="Search by name or issue" />
-
-    <button class="btn" onclick="exportToCSV()">Export to CSV</button>
+    <button id="exportBtn" class="btn">📥 Export CSV</button>
   </div>
 
   <div id="ticketContainer"></div>
 
-  <script>
-    let tickets = JSON.parse(localStorage.getItem('tickets')) || [];
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc, query } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu2bfT5vAjrSRp4NG2nF8kXqMfgE1dtL4",
+      authDomain: "tickets-690eb.firebaseapp.com",
+      projectId: "tickets-690eb",
+      storageBucket: "tickets-690eb.firebasestorage.app",
+      messagingSenderId: "926899526625",
+      appId: "1:926899526625:web:bcabdc5d1c89b1ece4d0a0",
+      measurementId: "G-4XLKDJ9HPY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const ticketContainer = document.getElementById('ticketContainer');
+    const priorityFilter = document.getElementById('priorityFilter');
+    const searchInput = document.getElementById('searchInput');
+
+    let tickets = [];
+
+    async function loadTickets() {
+      const q = query(collection(db, "tickets"));
+      const querySnapshot = await getDocs(q);
+      tickets = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      renderTickets();
+    }
 
     function renderTickets() {
-      const container = document.getElementById('ticketContainer');
-      const filter = document.getElementById('priorityFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
+      const search = searchInput.value.toLowerCase();
+      const priority = priorityFilter.value;
 
-      container.innerHTML = '';
+      ticketContainer.innerHTML = "";
 
-      const filteredTickets = tickets.filter(ticket => {
-        const matchesPriority = !filter || ticket.priority === filter;
-        const matchesSearch =
-          ticket.name.toLowerCase().includes(search) ||
-          ticket.type.toLowerCase().includes(search) ||
-          ticket.description.toLowerCase().includes(search);
-        return matchesPriority && matchesSearch;
-      });
+      const filtered = tickets.filter(t =>
+        (!priority || t.priority === priority) &&
+        (t.name.toLowerCase().includes(search) || t.description.toLowerCase().includes(search))
+      );
 
-      if (filteredTickets.length === 0) {
-        container.innerHTML = "<p>No matching tickets found.</p>";
-        return;
-      }
-
-      filteredTickets.forEach((ticket, index) => {
-        const priorityClass = ticket.priority.toLowerCase();
-        const ticketDiv = document.createElement('div');
-        ticketDiv.className = `ticket ${priorityClass}`;
-        ticketDiv.innerHTML = `
-          <p><strong>Name:</strong> ${ticket.name}</p>
-          <p><strong>Email:</strong> ${ticket.email}</p>
-          <p><strong>Issue Type:</strong> ${ticket.type}</p>
-          <p><strong>Description:</strong> ${ticket.description}</p>
-          <p><strong>Priority:</strong> ${ticket.priority}</p>
-          <button class="btn edit-btn" onclick="editTicket(${index})">Edit</button>
-          <button class="btn delete-btn" onclick="deleteTicket(${index})">Delete</button>
+      filtered.forEach(t => {
+        const div = document.createElement('div');
+        div.className = `ticket ${t.priority.toLowerCase()}`;
+        div.innerHTML = `
+          <p><strong>Name:</strong> ${t.name}</p>
+          <p><strong>Email:</strong> ${t.email}</p>
+          <p><strong>Type:</strong> ${t.type}</p>
+          <p><strong>Description:</strong> ${t.description}</p>
+          <p><strong>Priority:</strong> ${t.priority}</p>
+          <button class="btn edit-btn" onclick="editTicket('${t.id}')">✏️ Edit</button>
+          <button class="btn delete-btn" onclick="deleteTicket('${t.id}')">🗑 Delete</button>
         `;
-        container.appendChild(ticketDiv);
+        ticketContainer.appendChild(div);
       });
     }
 
-    function deleteTicket(index) {
+    window.editTicket = async (id) => {
+      const ticket = tickets.find(t => t.id === id);
+      const newDesc = prompt("Edit the description:", ticket.description);
+      if (newDesc !== null) {
+        await updateDoc(doc(db, "tickets", id), { description: newDesc });
+        ticket.description = newDesc;
+        renderTickets();
+      }
+    };
+
+    window.deleteTicket = async (id) => {
       if (confirm("Are you sure you want to delete this ticket?")) {
-        tickets.splice(index, 1);
-        localStorage.setItem('tickets', JSON.stringify(tickets));
+        await deleteDoc(doc(db, "tickets", id));
+        tickets = tickets.filter(t => t.id !== id);
         renderTickets();
       }
-    }
+    };
 
-    function editTicket(index) {
-      const ticket = tickets[index];
-      const name = prompt("Edit Name:", ticket.name);
-      const email = prompt("Edit Email:", ticket.email);
-      const type = prompt("Edit Issue Type:", ticket.type);
-      const description = prompt("Edit Description:", ticket.description);
-      const priority = prompt("Edit Priority (High/Medium/Low):", ticket.priority);
+    searchInput.addEventListener('input', renderTickets);
+    priorityFilter.addEventListener('change', renderTickets);
 
-      if (name && email && type && description && priority) {
-        tickets[index] = { ...ticket, name, email, type, description, priority };
-        localStorage.setItem('tickets', JSON.stringify(tickets));
-        renderTickets();
-      }
-    }
+    // CSV Export
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      let csv = "Name,Email,Type,Description,Priority\n";
+      tickets.forEach(t => {
+        csv += `"${t.name}","${t.email}","${t.type}","${t.description.replace(/"/g, '""')}","${t.priority}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "tickets.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
 
-    function exportToCSV() {
-      if (tickets.length === 0) return alert("No tickets to export!");
-
-      const csv = [
-        ["Name", "Email", "Issue Type", "Description", "Priority"],
-        ...tickets.map(t =>
-          [t.name, t.email, t.type, t.description, t.priority].map(field =>
-            `"${field.replace(/"/g, '""')}"`
-          ).join(",")
-        ),
-      ].join("\n");
-
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "tickets.csv";
-      link.click();
-    }
-
-    document.getElementById("priorityFilter").addEventListener("change", renderTickets);
-    document.getElementById("searchInput").addEventListener("input", renderTickets);
-
-    renderTickets();
+    loadTickets();
   </script>
 </body>
 </html>

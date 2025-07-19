@@ -28,29 +28,49 @@
     </div>
   </div>
 
- <script>
-  document.getElementById('ticketForm').addEventListener('submit', function(e) {
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBu2bfT5vAjrSRp4NG2nF8kXqMfgE1dtL4",
+    authDomain: "tickets-690eb.firebaseapp.com",
+    projectId: "tickets-690eb",
+    storageBucket: "tickets-690eb.firebasestorage.app",
+    messagingSenderId: "926899526625",
+    appId: "1:926899526625:web:bcabdc5d1c89b1ece4d0a0",
+    measurementId: "G-4XLKDJ9HPY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  // Handle form submission
+  const form = document.getElementById('ticketForm');
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const form = e.target;
     const ticket = {
-      id: Date.now(),
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       type: form.type.value.trim(),
       description: form.description.value.trim(),
-      priority: form.priority.value
+      priority: form.priority.value,
+      timestamp: serverTimestamp()
     };
 
-    const existingTickets = JSON.parse(localStorage.getItem('tickets')) || [];
-    existingTickets.push(ticket);
-    localStorage.setItem('tickets', JSON.stringify(existingTickets));
-
-    document.getElementById('successMessage').innerText = "✅ Ticket submitted successfully!";
-    form.reset();
-
+    try {
+      await addDoc(collection(db, "tickets"), ticket);
+      document.getElementById('successMessage').innerText = "✅ Ticket submitted!";
+      form.reset();
+    } catch (err) {
+      alert("❌ Error submitting ticket: " + err.message);
+    }
   });
 </script>
+
 
 </body>
 </html>
