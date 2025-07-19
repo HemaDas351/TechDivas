@@ -27,7 +27,7 @@ The app addresses the growing need for individuals to monitor and improve their 
 ---
 Here’s a clean and organized **file structure** section you can add to your `README.md`:
 
-```markdown
+```
 ## 📁 Project File Structure
 
 ```
