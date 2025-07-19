@@ -12,10 +12,11 @@
       <h2>Admin Panel</h2>
       <nav>
         <ul>
-          <li><a href="Clients.html">Clients</a></li>
-          <li><a href="Deadlines.html">Deadlines</a></li>
-          <li><a href="Tickets.html">Tickets</a></li>
-          <li><a href="Progress.html">Progress</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#" onclick="loadPage('Clients.html')">Clients</a></li>
+          <li><a href="#" onclick="loadPage('Deadlines.html')">Deadlines</a></li>
+          <li><a href="#" onclick="loadPage('Tickets.html')">Tickets</a></li>
+          <li><a href="#" onclick="loadPage('Progress.html')">Progress</a></li>
         </ul>
       </nav>
     </aside>
@@ -24,13 +25,19 @@
       <section class="dashboard-home">
         <h2>Welcome to the Admin Dashboard</h2>
         <div class="quick-links">
-          <button><a href="Clients.html">Go to Clients</a></button>
-          <button><a href="Deadlines.html">Go to Deadlines</a></button>
-          <button><a href="Tickets.html">Go to Tickets</a></button>
-          <button><a href="Progress.html">Go to Progress</a></button>
+          <button onclick="loadPage('Clients.html')">Go to Clients</button>
+          <button onclick="loadPage('Deadlines.html')">Go to Deadlines</button>
+          <button onclick="loadPage('Tickets.html')">Go to Tickets</button>
+          <button onclick="loadPage('Progress.html')">Go to Progress</button>
         </div>
+        <iframe id="contentFrame" src="" style="width: 100%; height: 70vh; border: none; margin-top: 20px;"></iframe>
       </section>
     </main>
   </div>
+  <script>
+    function loadPage(page) {
+      document.getElementById("contentFrame").src = page;
+    }
+  </script>
 </body>
 </html>
