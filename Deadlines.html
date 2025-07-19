@@ -3,37 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Deadlines - Admin Dashboard</title>
-  <link rel="stylesheet" href="admin.css" />
+  <title>Submit Deadline</title>
+  <link rel="stylesheet" href="Deadlines.css" />
 </head>
 <body>
-
-    <main class="main-content">
-      <section class="card">
-        <h3>Upcoming Deadlines</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Client</th>
-              <th>Task</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sanjukta Deka</td>
-              <td>Submit project proposal</td>
-              <td>2025-07-25</td>
-            </tr>
-            <tr>
-              <td>Mariam Ahmed</td>
-              <td>Finalize UI mockups</td>
-              <td>2025-07-28</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
+  <div class="form-container">
+    <div class="form-card">
+      <h2>Submit Project Deadline</h2>
+      <form id="deadlineForm">
+        <input type="text" name="projectName" placeholder="Project Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="date" name="deadlineDate" required />
+        <textarea name="details" placeholder="Deadline Details" required></textarea>
+        <button type="submit">Submit Deadline</button>
+        <div id="successMessage"></div>
+      </form>
+    </div>
   </div>
+
+  <!-- Firebase & EmailJS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBu2bfT5vAjrSRp4NG2nF8kXqMfgE1dtL4",
+      authDomain: "tickets-690eb.firebaseapp.com",
+      projectId: "tickets-690eb",
+      storageBucket: "tickets-690eb.appspot.com",
+      messagingSenderId: "926899526625",
+      appId: "1:926899526625:web:bcabdc5d1c89b1ece4d0a0",
+      measurementId: "G-4XLKDJ9HPY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById('deadlineForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const deadline = {
+        projectName: form.projectName.value.trim(),
+        email: form.email.value.trim(),
+        deadlineDate: form.deadlineDate.value,
+        details: form.details.value.trim(),
+        timestamp: serverTimestamp()
+      };
+
+      try {
+        await addDoc(collection(db, "deadlines"), deadline);
+        document.getElementById('successMessage').innerText = "✅ Deadline submitted!";
+
+        // Send email using EmailJS
+        emailjs.send("your_service_id", "your_template_id", {
+          to_email: deadline.email,
+          project_name: deadline.projectName,
+          deadline_date: deadline.deadlineDate,
+          details: deadline.details,
+        });
+
+        form.reset();
+      } catch (err) {
+        alert("❌ Error: " + err.message);
+      }
+    });
+  </script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("your_user_id"); // Replace with your EmailJS public key
+  </script>
 </body>
 </html>
