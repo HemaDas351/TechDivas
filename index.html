@@ -3,77 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HR Dashboard</title>
-  <link rel="stylesheet" href="index.css"/>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'/>
+  <title>HR Management Dashboard</title>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
-
   <!-- Loader -->
-  <div id="loader" class="loader"></div>
+  <div id="loader">Loading...</div>
 
   <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="logo_content">
-      <div class="logo">
-        <i class='bx bx-layer'></i>
-        <div class="logo_name">HR Dashboard</div>
-      </div>
-      <i class='bx bx-menu' id="btn"></i>
+  <nav class="sidebar" id="sidebar">
+    <div class="logo-section">
+      <i class="bx bx-menu" id="btn"></i>
+      <span class="logo-name">HR Dashboard</span>
     </div>
-    <ul class="nav_list">
-      <li><a href="#announcements"><i class='bx bx-bell'></i><span class="links_name">Announcements</span></a></li>
-      <li><a href="#accomplishments"><i class='bx bx-trophy'></i><span class="links_name">Accomplishments</span></a></li>
-      <li><a href="#resources"><i class='bx bx-folder'></i><span class="links_name">Resources</span></a></li>
-      <li><a href="#opportunities"><i class='bx bx-briefcase'></i><span class="links_name">Opportunities</span></a></li>
-      <li><a href="#feedback"><i class='bx bx-comment-dots'></i><span class="links_name">Feedback</span></a></li>
-      <li><a href="#contact"><i class='bx bx-phone'></i><span class="links_name">Contact</span></a></li>
+    <ul class="nav-links">
+      <li><a href="#announcements"><i class="bx bx-bell"></i><span>Announcements</span></a></li>
+      <li><a href="#accomplishments"><i class="bx bx-star"></i><span>Accomplishments</span></a></li>
+      <li><a href="#resources"><i class="bx bx-book"></i><span>Resources</span></a></li>
+      <li><a href="#opportunities"><i class="bx bx-briefcase"></i><span>Opportunities</span></a></li>
+      <li><a href="#feedback"><i class="bx bx-message"></i><span>Feedback</span></a></li>
+      <li><a href="#contact"><i class="bx bx-phone"></i><span>Contact</span></a></li>
     </ul>
+  </nav>
+
+  <!-- Hamburger for Mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="bx bx-menu"></i>
   </div>
 
   <!-- Main Content -->
-  <div class="main_content">
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" title="Go to top">↑</button>
+  <main class="main-content">
+    <section id="announcements" class="section animated-section">Announcements Section</section>
+    <section id="accomplishments" class="section animated-section">Accomplishments Section</section>
+    <section id="resources" class="section animated-section">Resources Section</section>
+    <section id="opportunities" class="section animated-section">Opportunities Section</section>
+    <section id="feedback" class="section animated-section">Feedback Section</section>
+    <section id="contact" class="section animated-section">Contact Section</section>
+    <footer class="section">© 2025 HR Management</footer>
+  </main>
 
-    <section id="announcements" class="section animated-section fade-in">
-      <h2>Announcements</h2>
-      <p>Welcome to the Automated HR Management System dashboard. Stay updated with latest news and deadlines.</p>
-    </section>
-
-    <section id="accomplishments" class="section animated-section fade-in">
-      <h2>Accomplishments</h2>
-      <p>Track project milestones, employee achievements, and team progress here.</p>
-    </section>
-
-    <section id="resources" class="section animated-section fade-in">
-      <h2>Resources</h2>
-      <p>Access project documents, guidelines, and shared files in this section.</p>
-    </section>
-
-    <section id="opportunities" class="section animated-section fade-in">
-      <h2>Opportunities</h2>
-      <p>Explore openings, internal job postings, and external client projects.</p>
-    </section>
-
-    <section id="feedback" class="section animated-section fade-in">
-      <h2>Feedback</h2>
-      <p>Let us know your thoughts to help improve this dashboard.</p>
-      <form>
-        <textarea placeholder="Your feedback..." rows="4" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-
-    <section id="contact" class="section animated-section fade-in">
-      <h2>Contact</h2>
-      <p>Email: hr@example.com<br>Phone: +91-9876543210</p>
-    </section>
-
-    <footer class="footer">
-      <p>&copy; 2025 Automated HR System. All rights reserved.</p>
-    </footer>
-  </div>
+  <!-- Scroll to top -->
+  <button id="scrollTopBtn">↑</button>
 
   <script src="index.js"></script>
 </body>

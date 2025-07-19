@@ -1,102 +1,84 @@
-// Existing code...
-
-// Loader fade-out after page load
+// Loader removal
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) {
     loader.style.opacity = "0";
     setTimeout(() => loader.style.display = "none", 300);
   }
-
   revealOnScroll();
   handleScrollAnimation();
 });
 
-// Sidebar toggle
-const sidebar = document.querySelector(".sidebar");
-const closeBtn = document.getElementById("btn");
-const searchBtn = document.querySelector(".bx-search");
-
-if (closeBtn && sidebar) {
-  closeBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-  });
-}
-
-if (searchBtn && sidebar) {
-  searchBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-  });
-}
-
-function menuBtnChange() {
-  if (sidebar.classList.contains("open")) {
-    closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-  } else {
-    closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-  }
-}
-
-// Scroll animation
+// Scroll reveal animations
 const animatedSections = document.querySelectorAll(".animated-section");
-const revealOnScroll = () => {
-  animatedSections.forEach((section) => {
+function revealOnScroll() {
+  animatedSections.forEach(section => {
     const rect = section.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
       section.classList.add("visible");
     }
   });
-};
+}
 window.addEventListener("scroll", revealOnScroll);
 
-const fadeElements = document.querySelectorAll(".fade-in");
-const handleScrollAnimation = () => {
-  fadeElements.forEach((el) => {
+// Scroll fade-ins
+const fadeElements = document.querySelectorAll('.fade-in');
+function handleScrollAnimation() {
+  fadeElements.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
-      el.classList.add("visible");
+      el.classList.add('visible');
     }
   });
-};
-window.addEventListener("scroll", handleScrollAnimation);
+}
+window.addEventListener('scroll', handleScrollAnimation);
 
-// Scroll to top
+// Scroll to top button
 const scrollBtn = document.getElementById("scrollTopBtn");
 if (scrollBtn) {
   window.addEventListener("scroll", () => {
     scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
   });
+
   scrollBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
-// 🔄 Swipe-to-open sidebar (mobile)
+// Sidebar toggle (hamburger + button)
+const sidebar = document.querySelector(".sidebar");
+const hamburger = document.querySelector(".hamburger");
+const menuToggleBtn = document.querySelector("#btn");
+
+function toggleSidebar() {
+  sidebar.classList.toggle("open");
+}
+if (hamburger) hamburger.addEventListener("click", toggleSidebar);
+if (menuToggleBtn) menuToggleBtn.addEventListener("click", toggleSidebar);
+
+// Optional: Change icon on toggle
+function menuBtnChange() {
+  if (sidebar.classList.contains("open")) {
+    menuToggleBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    menuToggleBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+}
+
+// Swipe-to-open (mobile drawer)
 let touchStartX = 0;
 let touchEndX = 0;
 
-document.addEventListener("touchstart", (e) => {
+document.addEventListener("touchstart", e => {
   touchStartX = e.changedTouches[0].screenX;
-}, false);
+}, { passive: true });
 
-document.addEventListener("touchmove", (e) => {
+document.addEventListener("touchend", e => {
   touchEndX = e.changedTouches[0].screenX;
-}, false);
-
-document.addEventListener("touchend", () => {
-  const swipeDistance = touchEndX - touchStartX;
-
-  // Right swipe to open
-  if (swipeDistance > 100 && !sidebar.classList.contains("open")) {
+  if (touchEndX - touchStartX > 80 && !sidebar.classList.contains("open")) {
     sidebar.classList.add("open");
-    menuBtnChange();
   }
-
-  // Left swipe to close
-  if (swipeDistance < -100 && sidebar.classList.contains("open")) {
+  if (touchStartX - touchEndX > 80 && sidebar.classList.contains("open")) {
     sidebar.classList.remove("open");
-    menuBtnChange();
   }
-}, false);
+}, { passive: true });
