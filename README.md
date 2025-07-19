@@ -25,7 +25,38 @@ The app addresses the growing need for individuals to monitor and improve their 
 - AI-powered health suggestions and reminders
 
 ---
+Here’s a clean and organized **file structure** section you can add to your `README.md`:
 
+```markdown
+## 📁 Project File Structure
+
+```
+
+├── hr-dashboard-backend/           # Backend folder
+│   └── ...                         # Backend files (APIs, server code, etc.)
+├── Clients.html                    # Client management page
+├── Deadlines.html                  # Admin - Deadlines panel
+├── Progress.html                   # Admin - Progress tracker
+├── Tickets.html                    # Admin - Ticket system
+├── add-new-client.css              # Styles for Add Client
+├── add-new-client.html             # Form to add new client
+├── admin.css                       # Admin styles
+├── admin.html                      # Admin dashboard
+├── admin.js                        # Admin dashboard script
+├── background.png                  # Landing page background image
+├── contact.css                     # Contact page styles
+├── contact.html                    # Contact page
+├── discuss.css                     # Discuss section styles
+├── discuss.html                    # Discussion page
+├── edit-client.html                # Edit client info page
+├── index.css                       # Landing page styles
+├── index.html                      # Landing page
+├── index.js                        # Base JS file
+├── login.css                       # Login page styles
+├── login.html                      # Login page
+└── README.md                       # Project documentation
+
+```
 ## 🛠️ Tech Stack
 
 | Frontend | Backend | Database | Others |
