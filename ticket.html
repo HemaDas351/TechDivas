@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raise a Ticket</title>
-  <link rel="stylesheet" href="tickets.css" />
+  <link rel="stylesheet" href="ticket.css" />
 </head>
 <body>
   <div class="ticket-container">
@@ -28,27 +28,33 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('ticketForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+ <script>
+  document.getElementById('ticketForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      const form = e.target;
-      const ticket = {
-        id: Date.now(),
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        type: form.type.value.trim(),
-        description: form.description.value.trim(),
-        priority: form.priority.value
-      };
+    const form = e.target;
+    const ticket = {
+      id: Date.now(),
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      type: form.type.value.trim(),
+      description: form.description.value.trim(),
+      priority: form.priority.value
+    };
 
-      const existingTickets = JSON.parse(localStorage.getItem('tickets')) || [];
-      existingTickets.push(ticket);
-      localStorage.setItem('tickets', JSON.stringify(existingTickets));
+    const existingTickets = JSON.parse(localStorage.getItem('tickets')) || [];
+    existingTickets.push(ticket);
+    localStorage.setItem('tickets', JSON.stringify(existingTickets));
 
-      document.getElementById('successMessage').innerText = "✅ Ticket submitted successfully!";
-      form.reset();
-    });
-  </script>
+    document.getElementById('successMessage').innerText = "✅ Ticket submitted successfully!";
+    form.reset();
+
+    // ✅ Move this inside the submit event
+    setTimeout(() => {
+      window.location.href = 'Tickets.html';
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
