@@ -93,6 +93,8 @@ Key features include:
 * 📤 Export data to CSV 
 
 ---
+> ⚠️ **Note:** Due to time constraints during the final development phase, we were unable to fully implement enhanced login and registration functionality to save and authenticate admin details. However, to provide a complete overview of the Admin Dashboard — including its UI, features, and functionality — we have included relevant screenshots for reference.
+
 
 ## 📸 Screenshots
 <img width="1916" height="974" alt="image" src="https://github.com/user-attachments/assets/108d410e-51f5-450b-a251-ad4c58f09a8f" />
