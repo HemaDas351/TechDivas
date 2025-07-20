@@ -88,19 +88,28 @@ Key features include:
 * ✅ Manage and view project deliverables
 * 📈 Visual progress tracking
 * 💬 Discussion board for internal communication
-* 📝 Feedback form with Typeform/EmailJS
-* 📬 Contact form with email integration
-* 📤 Export data to CSV *(optional)*
+* 📝 Feedback form 
+* 📬 Contact form 
+* 📤 Export data to CSV 
 
 ---
 
 ## 📸 Screenshots
+<img width="1916" height="974" alt="image" src="https://github.com/user-attachments/assets/108d410e-51f5-450b-a251-ad4c58f09a8f" />
+<img width="1919" height="951" alt="image" src="https://github.com/user-attachments/assets/7eaa2d3c-b3c3-44af-8134-550931beba30" />
+<img width="1919" height="971" alt="image" src="https://github.com/user-attachments/assets/887e266f-c732-4775-8a5c-cd5b0bb5625d" />
+<img width="1911" height="956" alt="image" src="https://github.com/user-attachments/assets/114d6dbd-9338-41b2-880e-6ee0593ab368" />
+<img width="1903" height="961" alt="image" src="https://github.com/user-attachments/assets/3f3ee3c0-fe58-41a2-92a9-97a0674e37bf" />
+<img width="1909" height="970" alt="image" src="https://github.com/user-attachments/assets/b8f3873a-114d-4695-9d91-55e54e67b39c" />
 
-> *(Add your dashboard screenshots here)*
+<img width="1904" height="966" alt="image" src="https://github.com/user-attachments/assets/70fecb00-05d4-49bc-980b-a3171b658554" />
+<img width="1904" height="968" alt="image" src="https://github.com/user-attachments/assets/f3f25d4c-d3e4-48bc-be64-6a530699114f" />
 
-Example:
-![Admin Panel](./assets/admin-dashboard.png)
-![Deadlines Countdown](./assets/deadlines.png)
+<img width="1918" height="965" alt="image" src="https://github.com/user-attachments/assets/4406d41e-6e95-424b-b0a5-d55c46bd5db8" />
+<img width="1910" height="968" alt="image" src="https://github.com/user-attachments/assets/86e42a28-8267-47a9-a5e0-5110ac59df26" />
+<img width="1890" height="960" alt="image" src="https://github.com/user-attachments/assets/25356348-c1c5-4130-80df-4b14a031ddd5" />
+<img width="1910" height="967" alt="image" src="https://github.com/user-attachments/assets/21cc0d8d-8256-4281-9f8d-b0eb9f0db2d5" />
+<img width="1915" height="973" alt="image" src="https://github.com/user-attachments/assets/ee39da7a-2e9d-4328-8731-d4141c678eb0" />
 
 ---
 
