@@ -1,51 +1,32 @@
-async function loginUser(e) {
+async function login(e) {
   e.preventDefault();
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  const res = await fetch("http://localhost:5000/api/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
+  const username = document.getElementById("user").value.trim();
+  const password = document.getElementById("pass").value.trim();
   const msg = document.getElementById("loginMsg");
 
-  if (res.ok) {
-    localStorage.setItem("token", data.token);
-    msg.style.color = "green";
-    msg.textContent = "Login successful!";
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 1000);
-  } else {
+  try {
+    const res = await fetch("http://localhost:5000/api/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("user", JSON.stringify(data));
+      msg.style.color = "green";
+      msg.textContent = "Login successful! Redirecting...";
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1500);
+    } else {
+      msg.style.color = "red";
+      msg.textContent = data.message || "Login failed";
+    }
+  } catch (err) {
     msg.style.color = "red";
-    msg.textContent = data.message || "Login failed";
+    msg.textContent = "An error occurred. Please try again.";
   }
 }
-document.getElementById('loginBtn').addEventListener('click', async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  const res = await fetch('http://localhost:5000/api/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-  if (res.ok) {
-    alert('Login successful');
-    window.location.href = 'dashboard.html';
-  } else {
-    alert(data.message || 'Login failed');
-  }
-});
