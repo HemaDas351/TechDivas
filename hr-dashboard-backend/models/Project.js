@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
-  name: String,
+  title: String,
   description: String,
   deliverables: [String],
   status: { type: String, default: 'Ongoing' },

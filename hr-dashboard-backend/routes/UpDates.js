@@ -6,19 +6,18 @@ const {
   updateUpdate,
   deleteUpdate
 } = require('../controllers/updateController');
+const { authenticate, isAdmin } = require('../middleware/authMiddleware');
 
-// POST a new update
-router.post('/', createUpdate);
+// POST a new update (only authenticated users)
+router.post('/', authenticate, createUpdate);
 
-// GET all updates
+// GET all updates (optional: public or protected)
 router.get('/', getAllUpdates);
 
-// PUT (edit) an update
-router.put('/:id', updateUpdate);
+// PUT (edit) an update (only authenticated users)
+router.put('/:id', authenticate, updateUpdate);
 
-// DELETE an update
-router.delete('/:id', deleteUpdate);
+// DELETE an update (only admin)
+router.delete('/:id', authenticate, isAdmin, deleteUpdate);
 
 module.exports = router;
-
-const { authenticate, isAdmin } = require('../middleware/authMiddleware');
