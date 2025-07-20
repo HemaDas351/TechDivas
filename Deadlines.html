@@ -131,33 +131,43 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const form = document.getElementById('deadlineForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem("token");
 
-      const deadline = {
-        projectName: form.projectName.value.trim(),
-        email: form.email.value.trim(),
-        deadlineDate: form.deadlineDate.value,
-        details: form.details.value.trim(),
-        timestamp: serverTimestamp()
-      };
-
-      try {
-        await addDoc(collection(db, "deadlines"), deadline);
-        document.getElementById('successMessage').innerText = "✅ Deadline submitted!";
-
-        emailjs.send("your_service_id", "your_template_id", {
-          to_email: deadline.email,
-          project_name: deadline.projectName,
-          deadline_date: deadline.deadlineDate,
-          details: deadline.details,
-        });
-
-        form.reset();
-      } catch (err) {
-        alert("❌ Error: " + err.message);
+      if (!token) {
+        alert("Please log in first.");
+        window.location.href = "login.html";
+        return;
       }
+
+      const form = document.getElementById('deadlineForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const deadline = {
+          projectName: form.projectName.value.trim(),
+          email: form.email.value.trim(),
+          deadlineDate: form.deadlineDate.value,
+          details: form.details.value.trim(),
+          timestamp: serverTimestamp()
+        };
+
+        try {
+          await addDoc(collection(db, "deadlines"), deadline);
+          document.getElementById('successMessage').innerText = "✅ Deadline submitted!";
+
+          emailjs.send("your_service_id", "your_template_id", {
+            to_email: deadline.email,
+            project_name: deadline.projectName,
+            deadline_date: deadline.deadlineDate,
+            details: deadline.details,
+          });
+
+          form.reset();
+        } catch (err) {
+          alert("❌ Error: " + err.message);
+        }
+      });
     });
   </script>
 

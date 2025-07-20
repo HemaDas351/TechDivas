@@ -8,15 +8,15 @@
 <body>
   <div class="form-container">
     <h2>Add New Client</h2>
-    <form id="clientForm">
+    <form id="addClientForm" onsubmit="addClient(event)">
       <label for="name">Client Name</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" placeholder="Enter client's name" required>
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" placeholder="Enter email address" required>
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="password" placeholder="Enter a strong password" minlength="6" required>
 
       <label for="role">Role</label>
       <select id="role" name="role" required>
@@ -31,35 +31,6 @@
     </form>
   </div>
 
-  <script>
-    // Initialize static clients only once
-    if (!localStorage.getItem('clientsInitialized')) {
-      const staticClients = [
-        { name: "Sanjukta Deka", email: "Sanjukta@example.com", password: "123456", role: "HR Manager" },
-        { name: "Rema Das", email: "Rema@example.com", password: "123456", role: "Content Head" },
-        { name: "Ankita Kalita", email: "ankita@example.com", password: "123456", role: "Financial Advisor" },
-        { name: "Mariam Ahmed", email: "MariamA@example.com", password: "123456", role: "Frontend Senior Developer" }
-      ];
-      localStorage.setItem('clients', JSON.stringify(staticClients));
-      localStorage.setItem('clientsInitialized', 'true');
-    }
-
-    document.getElementById('clientForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const role = document.getElementById('role').value;
-
-      let clients = JSON.parse(localStorage.getItem('clients')) || [];
-
-      clients.push({ name, email, password, role });
-
-      localStorage.setItem('clients', JSON.stringify(clients));
-
-      window.location.href = 'Clients.html';
-    });
-  </script>
+  <script src="add-new-client.js"></script>
 </body>
 </html>
