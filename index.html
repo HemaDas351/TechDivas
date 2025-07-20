@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HR Management Dashboard</title>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.33/build/spline-viewer.js"></script>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader">Loading...</div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="logo-section"><br><br>
+      <span class="logo-name">HR Dashboard</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="active"><i class="bx bx-home"></i><span>Home</span></a></li>
+      <li><a href="admin.html"><i class="bx bx-shield"></i><span>Admin Panel</span></a></li>
+      <li><a href="deliverablesystem.html"><i class="bx bx-star"></i><span>My Deliverables</span></a></li>
+      <li><a href="ticket.html"><i class="bx bx-book"></i><span>Raise a ticket</span></a></li>
+      <li><a href="discuss.html"><i class="bx bx-message"></i><span>Feedback</span></a></li>
+      <li><a href="contact.html"><i class="bx bx-phone"></i><span>Contact</span></a></li>
+      <li><a href="license.html"><i class="bx bx-file"></i><span>License</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Hamburger for Mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="bx bx-menu"></i>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="spline-background">
+      <spline-viewer url="https://prod.spline.design/546m4QeP9Nx3vj-B/scene.splinecode"></spline-viewer>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="section">© 2025 HR Management</footer>
+
+  <!-- Scroll to top -->
+  <button id="scrollTopBtn">↑</button>
+
+  <script src="index.js"></script>
+</body>
+</html>

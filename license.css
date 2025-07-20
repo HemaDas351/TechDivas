@@ -1,0 +1,220 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Sidebar - FIRST STYLING PRESERVED */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #003049;
+  padding: 1rem;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+.sidebar .logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+.sidebar .logo-name {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: white;
+}
+.sidebar .nav-links li {
+  margin: 1rem 0;
+}
+.sidebar .nav-links a {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+.sidebar .nav-links a:hover {
+  background: #005577;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 28px;
+  z-index: 1001;
+  color: #dae4e9;
+  cursor: pointer;
+}
+
+/* Main Content Layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main.main-content {
+  flex: 1;
+  margin-left: 250px;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+/* Footer */
+footer.section {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  padding: 1rem 0;
+  background: #f4f4f4;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.card h2, .card h3 {
+  color: #110255;
+  margin-bottom: 15px;
+}
+.card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+.card h2 i, .card h3 i {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Dashboard Heading */
+.dashboard-home h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #110255;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 5px;
+  overflow: hidden;
+}
+table th, table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+table th {
+  background: #e3e6f3;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+button.action-btn {
+  margin: 0 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  background: #110255;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button.action-btn:hover {
+  background: #1f3ad8;
+}
+
+/* General Buttons and Quick Links */
+button a,
+.quick-links a.btn-link,
+a.btn-link {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #110255;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  text-align: center;
+}
+.quick-links a.btn-link:hover,
+a.btn-link:hover {
+  background: #1f3ad8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .hamburger {
+    display: block;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+  .sidebar .logo-name {
+    font-size: 1rem;
+  }
+  .sidebar .nav-links a {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.95rem;
+  }
+  .container {
+    flex-direction: column;
+  }
+}

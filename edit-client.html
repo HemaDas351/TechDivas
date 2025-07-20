@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Client</title>
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .edit-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #110255;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, select {
+      margin-top: 0.5rem;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      background: #110255;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #1f3ad8;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 1rem;
+      text-align: center;
+      color: #110255;
+      text-decoration: underline;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .edit-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="edit-container">
+    <h2>Edit Client Details</h2>
+    <form id="editForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required pattern="^[a-zA-Z\s]{2,50}$" title="Only letters and spaces allowed, 2-50 characters">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="6" title="Minimum 6 characters">
+
+      <label for="role">Role</label>
+      <select id="role" name="role" required>
+        <option value="">Select Role</option>
+        <option>Client</option>
+        <option>Manager</option>
+        <option>Admin</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+      <a href="clients.html" class="back-link">&larr; Back to Clients</a>
+    </form>
+  </div>
+
+  <script>
+    const clients = JSON.parse(localStorage.getItem("clients")) || [];
+    const index = localStorage.getItem("editClientIndex");
+
+    if (index === null || !clients[index]) {
+      alert("No client data found.");
+      window.location.href = "clients.html";
+    }
+
+    const client = clients[index];
+
+    document.getElementById("name").value = client.name;
+    document.getElementById("email").value = client.email;
+    document.getElementById("password").value = client.password || "";
+    document.getElementById("role").value = client.role;
+
+    document.getElementById("editForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+
+      clients[index] = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value.trim(),
+        role: document.getElementById("role").value
+      };
+
+      localStorage.setItem("clients", JSON.stringify(clients));
+      localStorage.removeItem("editClientIndex");
+      alert("Client details updated successfully!");
+      window.location.href = "clients.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Client Progress</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .progress-bar {
+      background-color: #ddd;
+      border-radius: 30px;
+      overflow: hidden;
+      height: 20px;
+      margin: 15px 0;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, #4193a7, #022045);
+      text-align: right;
+      color: white;
+      font-weight: bold;
+      padding-right: 10px;
+      line-height: 20px;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f2f7ff;
+      margin-top: 8px;
+      border-left: 4px solid #007bff;
+      border-radius: 6px;
+    }
+    .task select {
+      padding: 5px;
+      border-radius: 4px;
+    }
+    .search-input, .input-text, .input-date {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 6px 14px;
+      cursor: pointer;
+      border: none;
+      background-color: #032a53;
+      color: white;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background-color: #032e5c;
+    }
+    .btn.toggle {
+      background-color: #034074;
+    }
+    .btn.toggle:hover {
+      background-color: #495057;
+    }
+    .btn.danger {
+      background-color: #b02a37;
+    }
+    .btn.danger:hover {
+      background-color: #a12833;
+    }
+    .add-client-form {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Client Progress Overview</h2>
+      <input type="text" id="search" class="search-input" placeholder="Search clients...">
+    </div>
+
+    <div class="add-client-form">
+      <input type="text" id="clientName" class="input-text" placeholder="Client name">
+      <input type="date" id="clientDeadline" class="input-date">
+      <button class="btn" onclick="addClient()">Add Client</button>
+    </div>
+
+    <div id="clientList"></div>
+  </div>
+
+  <script>
+    let clients = [
+      {
+        id: 1,
+        name: "Client A",
+        deadline: "2025-08-10",
+        tasks: [
+          { id: 1, title: "Design UI", status: "Completed" },
+          { id: 2, title: "Setup backend", status: "In Progress" },
+          { id: 3, title: "Test cases", status: "Pending" },
+        ]
+      },
+      {
+        id: 2,
+        name: "Client B",
+        deadline: "2025-08-15",
+        tasks: [
+          { id: 1, title: "Create logo", status: "Completed" },
+          { id: 2, title: "Deploy site", status: "Pending" },
+        ]
+      }
+    ];
+
+    const clientList = document.getElementById("clientList");
+    const searchInput = document.getElementById("search");
+
+    function renderClients() {
+      const search = searchInput.value.toLowerCase();
+      clientList.innerHTML = "";
+
+      clients
+        .filter(client => client.name.toLowerCase().includes(search))
+        .forEach(client => {
+          const total = client.tasks.length;
+          const completed = client.tasks.filter(t => t.status === "Completed").length;
+          const progressPercent = total ? Math.round((completed / total) * 100) : 0;
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const header = document.createElement("div");
+          header.innerHTML = `
+            <h3>${client.name}</h3>
+            <p><strong>Deadline:</strong> ${client.deadline}</p>
+            <div class="progress-bar">
+              <div class="progress" style="width: ${progressPercent}%">${progressPercent}%</div>
+            </div>
+            <p><strong>${completed}</strong> of <strong>${total}</strong> tasks completed</p>
+            <button class="btn toggle" onclick="toggleTasks(${client.id})">Toggle Tasks</button>
+            <button class="btn" onclick="addTaskPrompt(${client.id})">Add Task</button>
+            <button class="btn danger" onclick="deleteClient(${client.id})">Delete Client</button>
+          `;
+
+          const taskList = document.createElement("div");
+          taskList.id = `tasks-${client.id}`;
+          taskList.style.display = "none";
+
+          client.tasks.forEach(task => {
+            const taskDiv = document.createElement("div");
+            taskDiv.className = "task";
+            taskDiv.innerHTML = `
+              <span>${task.title}</span>
+              <div>
+                <select onchange="updateStatus(${client.id}, ${task.id}, this.value)">
+                  <option ${task.status === "Pending" ? "selected" : ""}>Pending</option>
+                  <option ${task.status === "In Progress" ? "selected" : ""}>In Progress</option>
+                  <option ${task.status === "Completed" ? "selected" : ""}>Completed</option>
+                </select>
+                <button class="btn danger" onclick="deleteTask(${client.id}, ${task.id})" style="margin-left: 10px;">Delete</button>
+              </div>
+            `;
+            taskList.appendChild(taskDiv);
+          });
+
+          card.appendChild(header);
+          card.appendChild(taskList);
+          clientList.appendChild(card);
+        });
+    }
+
+    function toggleTasks(clientId) {
+      const taskList = document.getElementById(`tasks-${clientId}`);
+      taskList.style.display = taskList.style.display === "none" ? "block" : "none";
+    }
+
+    function updateStatus(clientId, taskId, newStatus) {
+      const client = clients.find(c => c.id === clientId);
+      const task = client.tasks.find(t => t.id === taskId);
+      task.status = newStatus;
+      renderClients();
+    }
+
+    function addClient() {
+      const name = document.getElementById("clientName").value.trim();
+      const deadline = document.getElementById("clientDeadline").value;
+
+      if (!name || !deadline) {
+        alert("Please provide both client name and deadline.");
+        return;
+      }
+
+      const newClient = {
+        id: Date.now(),
+        name,
+        deadline,
+        tasks: []
+      };
+
+      clients.push(newClient);
+      document.getElementById("clientName").value = "";
+      document.getElementById("clientDeadline").value = "";
+      renderClients();
+    }
+
+    function addTaskPrompt(clientId) {
+      const taskTitle = prompt("Enter task title:");
+      if (taskTitle) {
+        const client = clients.find(c => c.id === clientId);
+        const newTask = {
+          id: Date.now(),
+          title: taskTitle,
+          status: "Pending"
+        };
+        client.tasks.push(newTask);
+        renderClients();
+      }
+    }
+
+    function deleteClient(clientId) {
+      if (confirm("Are you sure you want to delete this client?")) {
+        clients = clients.filter(c => c.id !== clientId);
+        renderClients();
+      }
+    }
+
+    function deleteTask(clientId, taskId) {
+      const client = clients.find(c => c.id === clientId);
+      client.tasks = client.tasks.filter(t => t.id !== taskId);
+      renderClients();
+    }
+
+    searchInput.addEventListener("input", renderClients);
+    renderClients();
+  </script>
+</body>
+</html>
