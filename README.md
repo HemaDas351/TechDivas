@@ -96,6 +96,10 @@ Key features include:
 
 ## 📸 Screenshots
 <img width="1916" height="974" alt="image" src="https://github.com/user-attachments/assets/108d410e-51f5-450b-a251-ad4c58f09a8f" />
+<img width="1910" height="953" alt="image" src="https://github.com/user-attachments/assets/feaa0ba8-ec45-4bf2-b8be-45c7f0456691" />
+<img width="1909" height="967" alt="image" src="https://github.com/user-attachments/assets/70e814b9-94fd-4633-ac2b-599c412f75d1" />
+
+
 <img width="1919" height="951" alt="image" src="https://github.com/user-attachments/assets/7eaa2d3c-b3c3-44af-8134-550931beba30" />
 <img width="1919" height="971" alt="image" src="https://github.com/user-attachments/assets/887e266f-c732-4775-8a5c-cd5b0bb5625d" />
 <img width="1911" height="956" alt="image" src="https://github.com/user-attachments/assets/114d6dbd-9338-41b2-880e-6ee0593ab368" />
