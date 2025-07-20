@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+    h1 { color: green; }
+    nav a { margin-right: 20px; }
+  </style>
+</head>
+<body>
+  <h1 id="welcome">Welcome</h1>
+  <p>Your role: <span id="role"></span></p>
+  <nav>
+    <a href="progress.html">Progress</a>
+    <a href="tickets.html">Tickets</a>
+  </nav>
+  <br />
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.token) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("welcome").innerText = "Welcome " + user.name;
+      document.getElementById("role").innerText = user.role;
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

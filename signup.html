@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+  <link rel="stylesheet" href="signup.css" />
+  <script defer src="signup.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css">
+</head>
+<body>
+  <form  onsubmit="registerUser(event)" id="signupForm">
+    <div class="wrapper">
+      <div class="login_box">
+        <div class="login-header">
+          <span>Sign Up</span>
+        </div>
+
+        <div class="input_box">
+          <input type="text" id="name" class="input-field" required>
+          <label for="name" class="label">Name</label>
+          <i class="bx bx-user icon"></i>
+        </div>
+
+        <div class="input_box">
+          <input type="email" id="email" class="input-field" required>
+          <label for="email" class="label">Email</label>
+          <i class="bx bx-envelope icon"></i>
+        </div>
+
+        <div class="input_box">
+          <input type="password" id="password" class="input-field" required>
+          <label for="password" class="label">Password</label>
+          <i class="bx bx-lock-alt icon"></i>
+        </div>
+
+        <div class="input_box" id="signupBtn">
+          <input type="submit" class="input-submit" value="Register">
+        </div>
+
+        <div class="register">
+          <span>Already have an account? <a href="login.html">Login</a></span>
+        </div>
+
+        <p id="signupMsg" style="text-align: center; color: red; margin-top: 10px;"></p>
+      </div>
+    </div>
+  </form>
+  <script src="signup.js"></script>
+</body>
+</html>
