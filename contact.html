@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - HR Dashboard</title>
+  <link rel="stylesheet" href="contact.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="logo-section"><br><br>
+      <span class="logo-name">HR Dashboard</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="bx bx-home"></i><span>Home</span></a></li>
+      <li><a href="admin.html"><i class="bx bx-shield"></i><span>Admin Panel</span></a></li>
+      <li><a href="deliverablesystem.html"><i class="bx bx-star"></i><span>My Deliverables</span></a></li>
+      <li><a href="Tickets.html"><i class="bx bx-book"></i><span>Ticket System</span></a></li>
+      <li><a href="discuss.html"><i class="bx bx-message"></i><span>Feedback</span></a></li>
+      <li><a href="contact.html" class="active"><i class="bx bx-phone"></i><span>Contact</span></a></li>
+      <li><a href="license.html"><i class="bx bx-file"></i><span>License</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Hamburger for Mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="bx bx-menu"></i>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="contact-section">
+      <h2>Contact Us</h2>
+      <div class="contact-container">
+        <!-- Contact Form -->
+        <form class="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h3>Team Members</h3>
+          <div class="person">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Person 1" />
+            <p><strong>Anuja Chakravarty</strong><br>Frontend Developer<br><i class="bx bx-envelope"></i> anuja@example.com</p>
+          </div>
+          <div class="person">
+            <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Person 2" />
+            <p><strong>Daisy Baishya</strong><br>Backend Developer<br><i class="bx bx-envelope"></i> daisy@example.com</p>
+          </div>
+
+          <h3>Connect with us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="bx bxl-linkedin"></i></a>
+            <a href="#"><i class="bx bxl-github"></i></a>
+            <a href="#"><i class="bx bxl-instagram"></i></a>
+          </div>
+
+          <h3>Our Location</h3>
+          <p><i class="bx bx-map"></i> Assam Engineering College, Assam, India</p>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.960030075407!2d91.73623677544185!3d26.14451889343611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3744c17c846c2e09%3A0x1d189cfeac05e61!2sAssam%20Engineering%20College!5e0!3m2!1sen!2sin!4v1658920000000!5m2!1sen!2sin"
+            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section">© 2025 HR Management</footer>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+/* === Base Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* === Loader === */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* === Sidebar === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background: #003049;
+  padding: 2rem 1rem;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+.sidebar .logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+.sidebar .logo-name {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.sidebar .nav-links li {
+  margin: 1rem 0;
+}
+.sidebar .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+  background-color: #005577;
+}
+
+/* === Hamburger Menu === */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 28px;
+  z-index: 1100;
+  color: #144da3;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+
+/* === Main Content === */
+body {
+  display: flex;
+  flex-direction: column;
+}
+main.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-top: 60px;
+}
+@media (min-width: 769px) {
+  main.main-content {
+    margin-left: 240px;
+    margin-top: 0;
+  }
+}
+
+/* === Spline Background === */
+.spline-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+spline-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+@media (max-width: 768px) {
+  spline-viewer {
+    height: 95vh;
+  }
+}
+
+/* === Footer === */
+footer.section {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  padding: 1rem 0;
+  background: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* === Scroll to Top === */
+#scrollTopBtn {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  background: #003049;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+  font-size: 1.2rem;
+  transition: background 0.3s;
+}
+#scrollTopBtn:hover {
+  background: #005577;
+}
+
+/* === Contact Section === */
+.contact-section {
+  padding: 2rem;
+}
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.contact-form, .contact-info {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.contact-form button {
+  padding: 0.9rem;
+  background: #003049;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.contact-form button:hover {
+  background: #005577;
+}
+.person {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.person img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #003049;
+}
+
+/* === Embedded Map or Frame === */
+iframe {
+  margin-top: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  height: 200px;
+  border: none;
+}
+
+/* === Mobile Tweaks === */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+  .contact-form,
+  .contact-info {
+    width: 100%;
+    padding: 1rem;
+  }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    font-size: 1rem;
+  }
+  .person img {
+    width: 50px;
+    height: 50px;
+  }
+  .social-icons a {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Deadlines</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f1f1f1; }
+    .deadline { background: white; padding: 15px; border-radius: 8px; margin: 10px auto; box-shadow: 0 0 10px #ccc; max-width: 800px; }
+    .controls { max-width: 800px; margin: auto; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    input, select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    button { padding: 6px 10px; margin-top: 5px; border: none; border-radius: 4px; cursor: pointer; }
+    .edit { background: #f39c12; color: white; }
+    .delete { background: #e74c3c; color: white; }
+    .export { background: #2ecc71; color: white; }
+  </style>
+</head>
+<body>
+  <h2>All Deadlines</h2>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by project" />
+    <button class="export" onclick="exportToCSV()">Export to CSV</button>
+  </div>
+
+  <div id="deadlineContainer"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBu2bfT5vAjrSRp4NG2nF8kXqMfgE1dtL4",
+  authDomain: "tickets-690eb.firebaseapp.com",
+  projectId: "tickets-690eb",
+  storageBucket: "tickets-690eb.appspot.com",
+  messagingSenderId: "926899526625",
+  appId: "1:926899526625:web:bcabdc5d1c89b1ece4d0a0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const container = document.getElementById("deadlineContainer");
+const searchInput = document.getElementById("searchInput");
+
+async function fetchDeadlines() {
+  const querySnapshot = await getDocs(collection(db, "deadlines"));
+  container.innerHTML = "";
+  querySnapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    const deadlineDate = new Date(data.deadline);
+    const now = new Date();
+    const diff = deadlineDate - now;
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    const div = document.createElement("div");
+    div.className = "deadline";
+    div.innerHTML = `
+      <strong>Project:</strong> ${data.project}<br>
+      <strong>Email:</strong> ${data.email}<br>
+      <strong>Details:</strong> ${data.details}<br>
+      <strong>Deadline:</strong> ${deadlineDate.toLocaleString()}<br>
+      <strong>⏳ Days Left:</strong> ${daysLeft} days
+      <br><br>
+      <button class="delete" onclick="deleteDeadline('${docSnap.id}')">Delete</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+window.deleteDeadline = async function (id) {
+  await deleteDoc(doc(db, "deadlines", id));
+  fetchDeadlines();
+};
+
+searchInput.addEventListener("input", () => {
+  const term = searchInput.value.toLowerCase();
+  const all = document.querySelectorAll(".deadline");
+  all.forEach(card => {
+    const visible = card.innerText.toLowerCase().includes(term);
+    card.style.display = visible ? "" : "none";
+  });
+});
+
+function exportToCSV() {
+  const rows = [["Project", "Email", "Details", "Deadline"]];
+  document.querySelectorAll(".deadline").forEach(el => {
+    const text = el.innerText.split("\n").filter(Boolean);
+    rows.push([
+      text[0].split(": ")[1],
+      text[1].split(": ")[1],
+      text[2].split(": ")[1],
+      text[3].split(": ")[1]
+    ]);
+  });
+
+  let csv = rows.map(r => r.join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "deadlines.csv";
+  a.click();
+}
+
+fetchDeadlines();
+</script>
+</body>
+</html>

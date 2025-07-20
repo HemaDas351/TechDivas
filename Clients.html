@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clients - Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+  <style>
+    .actions button {
+      margin-right: 6px;
+    }
+
+    .add-client-btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 16px;
+      background-color: #110255;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .add-client-btn:hover {
+      background-color: #1f3ad8;
+    }
+
+    .search-container {
+      margin-bottom: 15px;
+    }
+
+    .search-container input {
+      padding: 8px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Admin Panel</h2>
+      <nav>
+        <ul>
+          <li><a href="Clients.html">Clients</a></li>
+          <li><a href="Deadlines.html">Deadlines</a></li>
+          <li><a href="Tickets.html">Tickets</a></li>
+          <li><a href="Progress.html">Progress</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="clients">
+        <h3>List of Clients</h3>
+
+        <!-- 🔍 Search Clients -->
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search by name or email..." />
+        </div>
+
+        <!-- 📋 Client Table -->
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+
+        <!-- ➕ Add New Client -->
+        <a href="add-new-client.html" class="add-client-btn">Add New Client</a>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const clients = JSON.parse(localStorage.getItem('clients')) || [];
+    const tbody = document.querySelector('tbody');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderClients(filter = "") {
+      tbody.innerHTML = "";
+
+      const filteredClients = clients.filter(client =>
+        client.name.toLowerCase().includes(filter.toLowerCase()) ||
+        client.email.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      if (filteredClients.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="5">No matching clients found.</td>`;
+        tbody.appendChild(row);
+        return;
+      }
+
+      filteredClients.forEach((client, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${client.name}</td>
+          <td>${client.email}</td>
+          <td>••••••••</td>
+          <td>${client.role}</td>
+          <td class="actions">
+            <button class="action-btn" onclick="editClient(${index})">Edit</button>
+            <button class="action-btn" onclick="deleteClient(${index})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteClient(index) {
+      if (confirm("Are you sure you want to delete this client?")) {
+        clients.splice(index, 1);
+        localStorage.setItem("clients", JSON.stringify(clients));
+        renderClients(searchInput.value);
+      }
+    }
+
+    function editClient(index) {
+      localStorage.setItem("editClientIndex", index);
+      window.location.href = "edit-client.html";
+    }
+
+    searchInput.addEventListener("input", () => {
+      renderClients(searchInput.value);
+    });
+
+    renderClients(); // Initial render
+  </script>
+</body>
+</html>

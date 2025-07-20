@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <main class="main-content">
+    <section class="dashboard-home">
+      <h2>Welcome to the Admin Dashboard</h2>
+
+      <div class="quick-links">
+        <a href="index.html" class="btn-link">Home</a>
+        <button onclick="loadPage('Clients.html')">Go to Clients</button>
+        <button onclick="loadPage('Deadlines.html')">Go to Deadlines</button>
+        <button onclick="loadPage('Tickets.html')">Go to Tickets</button>
+        <button onclick="loadPage('deliverable.html')">Go to Progress</button>
+        <button onclick="loadPage('view-deadlines.html')">View Deadlines</button>
+      </div>
+
+      <iframe id="contentFrame" src="Clients.html" style="width: 100%; height: 70vh; border: none; margin-top: 20px;"></iframe>
+    </section>
+  </main>
+
+  <script>
+    function loadPage(page) {
+      document.getElementById("contentFrame").src = page;
+    }
+  </script>
+
+  <script src="admin.js"></script>
+</body>
+</html>
