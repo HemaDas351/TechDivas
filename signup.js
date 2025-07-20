@@ -1,39 +1,36 @@
-async function registerUser(e) {
-  e.preventDefault();
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const PORT = 5000;
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const msg = document.getElementById("signupMsg");
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-  try {
-    const res = await fetch("http://localhost:5000/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name, email, password })
-    });
+// Dummy in-memory storage (optional, for test only)
+const users = [];
 
-    const data = await res.json();
+// Register route
+app.post("/api/register", (req, res) => {
+  const { name, email, password } = req.body;
+  if (users.find(user => user.email === email)) {
+    return res.status(400).json({ message: "Email already registered" });
+  }
+  users.push({ name, email, password });
+  res.status(201).json({ message: "User registered successfully" });
+});
 
-    if (res.ok) {
-      msg.style.color = "green";
-      msg.textContent = "Signup successful! Redirecting to login...";
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 1500);
-    } else {
-      msg.style.color = "red";
-      msg.textContent = data.message || "Signup failed";
-    }
-  } catch (error) {
-  msg.style.color = "red";
-  msg.textContent = "An error occurred: " + error.message;
-  console.error(error); // shows detailed error in DevTools
-}
+// Login route
+app.post("/api/users/login", (req, res) => {
+  const { email, password } = req.body;
+  const user = users.find(u => u.email === email && u.password === password);
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+  res.json({ message: "Login successful", token: "fake-token-123" });
+});
 
-}
-
-// This line is not required as your HTML already uses: onsubmit="registerUser(event)"
-// document.getElementById("signupForm").addEventListener("submit", registerUser);
+// Start server
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+});

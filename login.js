@@ -1,32 +1,41 @@
-async function login(e) {
+document.getElementById("loginBtn").addEventListener("click", async (e) => {
   e.preventDefault();
 
-  const username = document.getElementById("user").value.trim();
-  const password = document.getElementById("pass").value.trim();
-  const msg = document.getElementById("loginMsg");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
   try {
     const res = await fetch("http://localhost:5000/api/users/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
     });
 
     const data = await res.json();
+    const msg = document.getElementById("loginMsg");
 
     if (res.ok) {
-      localStorage.setItem("user", JSON.stringify(data));
+      // Store token
+      localStorage.setItem("token", data.token);
+
+      // Show success
       msg.style.color = "green";
-      msg.textContent = "Login successful! Redirecting...";
+      msg.textContent = "Login successful!";
+
+      // Redirect
       setTimeout(() => {
         window.location.href = "dashboard.html";
-      }, 1500);
+      }, 1000);
     } else {
       msg.style.color = "red";
-      msg.textContent = data.message || "Login failed";
+      msg.textContent = data.message || "Login failed!";
     }
-  } catch (err) {
+  } catch (error) {
+    console.error("Login error:", error);
+    const msg = document.getElementById("loginMsg");
     msg.style.color = "red";
-    msg.textContent = "An error occurred. Please try again.";
+    msg.textContent = "Something went wrong!";
   }
-}
+});
