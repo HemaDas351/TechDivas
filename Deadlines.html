@@ -3,22 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Submit Deadline</title>
+  <title>Deadlines - Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
   <link rel="stylesheet" href="Deadlines.css" />
+  <style>
+    .form-container {
+      margin-top: 20px;
+    }
+
+    .form-card {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-card input,
+    .form-card textarea,
+    .form-card button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .form-card button {
+      background-color: #110255;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-card button:hover {
+      background-color: #1f3ad8;
+    }
+
+    #successMessage {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    table {
+      margin-top: 20px;
+    }
+
+    h3, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-container">
-    <div class="form-card">
-      <h2>Submit Project Deadline</h2>
-      <form id="deadlineForm">
-        <input type="text" name="projectName" placeholder="Project Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="date" name="deadlineDate" required />
-        <textarea name="details" placeholder="Deadline Details" required></textarea>
-        <button type="submit">Submit Deadline</button>
-        <div id="successMessage"></div>
-      </form>
-    </div>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Admin Panel</h2>
+      <nav>
+        <ul>
+          <li><a href="Clients.html">Clients</a></li>
+          <li><a href="Deadlines.html">Deadlines</a></li>
+          <li><a href="Tickets.html">Tickets</a></li>
+          <li><a href="Progress.html">Progress</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="card">
+        <h3>Upcoming Deadlines</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Task</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sanjukta Deka</td>
+              <td>Submit project proposal</td>
+              <td>2025-07-25</td>
+            </tr>
+            <tr>
+              <td>Mariam Ahmed</td>
+              <td>Finalize UI mockups</td>
+              <td>2025-07-28</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="form-container">
+        <div class="form-card">
+          <h2>Submit Project Deadline</h2>
+          <form id="deadlineForm">
+            <input type="text" name="projectName" placeholder="Project Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <input type="date" name="deadlineDate" required />
+            <textarea name="details" placeholder="Deadline Details" required></textarea>
+            <button type="submit">Submit Deadline</button>
+            <div id="successMessage"></div>
+          </form>
+        </div>
+      </section>
+    </main>
   </div>
 
   <!-- Firebase & EmailJS -->
@@ -55,7 +147,6 @@
         await addDoc(collection(db, "deadlines"), deadline);
         document.getElementById('successMessage').innerText = "✅ Deadline submitted!";
 
-        // Send email using EmailJS
         emailjs.send("your_service_id", "your_template_id", {
           to_email: deadline.email,
           project_name: deadline.projectName,

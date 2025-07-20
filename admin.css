@@ -1,4 +1,4 @@
-/* Reset and Base Styles */
+/* 🌐 Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -11,14 +11,14 @@ body {
   color: #333;
 }
 
-/* Container Layout */
+/* 🧱 Container Layout */
 .container {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
 }
 
-/* Sidebar */
+/* 📚 Sidebar */
 .sidebar {
   width: 250px;
   background: #110255;
@@ -55,7 +55,7 @@ body {
   background-color: #3020ad;
 }
 
-/* Main Content */
+/* 📄 Main Content */
 .main-content {
   flex-grow: 1;
   padding: 40px 30px;
@@ -63,13 +63,14 @@ body {
   background: #f9f9f9;
 }
 
+/* 🏠 Dashboard Heading */
 .dashboard-home h2 {
   font-size: 28px;
   margin-bottom: 20px;
   color: #110255;
 }
 
-/* Quick Links Section */
+/* 🔗 Quick Links */
 .quick-links {
   display: grid;
   gap: 15px;
@@ -77,18 +78,22 @@ body {
   margin-top: 20px;
 }
 
-.quick-links button {
+.quick-links button,
+.quick-links a.btn-link {
   padding: 12px;
   background: #110255;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 16px;
+  text-decoration: none;
   cursor: pointer;
+  text-align: center;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.quick-links button:hover {
+.quick-links button:hover,
+.quick-links a.btn-link:hover {
   background: #1f3ad8;
   transform: translateY(-2px);
 }
@@ -97,7 +102,7 @@ body {
   transform: scale(0.98);
 }
 
-/* Tables (if any used in other pages) */
+/* 📋 Tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -111,8 +116,8 @@ table {
 table th,
 table td {
   padding: 12px;
-  border-bottom: 1px solid #ddd;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 table th {
@@ -120,13 +125,7 @@ table th {
   font-weight: 600;
 }
 
-/* General Button (if reused elsewhere) */
-button a {
-  color: white;
-  text-decoration: none;
-}
-
-/* Card Component */
+/* 🧩 Cards */
 .card {
   background: white;
   border-radius: 6px;
@@ -135,7 +134,23 @@ button a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive Sidebar for Small Screens */
+/* 🧷 Action Buttons */
+button.action-btn {
+  margin: 0 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  background: #110255;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.action-btn:hover {
+  background: #1f3ad8;
+}
+
+/* 📱 Responsive Sidebar */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -163,35 +178,4 @@ button a {
   .quick-links {
     grid-template-columns: 1fr;
   }
-}
-
-/* Action Buttons for tables */
-button.action-btn {
-  margin: 0 4px;
-  padding: 6px 10px;
-  font-size: 14px;
-  background: #110255;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button.action-btn:hover {
-  background: #1f3ad8;
-}
-.quick-links a.btn-link {
-  display: inline-block;
-  padding: 10px 16px;
-  background: #110255;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-  text-align: center;
-  flex: 1;
-}
-
-.quick-links a.btn-link:hover {
-  background: #1f3ad8;
 }
